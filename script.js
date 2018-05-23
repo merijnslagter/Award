@@ -1,12 +1,7 @@
 var imageContainerMargin = 200;  // Margin + padding
 var currentBox = 0;
 var scrollPosition = 0;
-var myStyle = {
-    "color": "#f9ed32",
-    "weight": 5,
-    "opacity": 0.8,
-    "fillOpacity": 0.0
-}
+
 // This watches for the scrollable container
 $('div#contents').scroll(function() {
   scrollPosition = $(this).scrollTop();
@@ -15,7 +10,17 @@ $('div#contents').scroll(function() {
 // This adds data as a new layer to the map
 function refreshLayer(data, map, coord, zoom) {
   var dataLayer = L.geoJson(data,{
-    style: myStyle
+    style: function(feature) {
+        switch (feature.properties.name) {
+	      case 'plaats': return {color: "##f9ed32",opacity:0.8,fillOpacity: 0.7,weight:20};
+	      case 'peat': return {color: "#be0003",opacity:0.8,fillOpacity: 0.3,weight:1.5
+	      };
+	      case '25.00': return {color: "#fafafa",opacity:0.8,fillOpacity: 0.5,weight:1};
+	      case '50.00': return {color: "#a8a8a8",opacity:0.8,fillOpacity: 0.5,weight:1};
+	      case '75.00': return {color: "#575757",opacity:0.8,fillOpacity: 0.5,weight:1};
+	      case '100.00': return {color: "#050505",opacity:0.8,fillOpacity: 0.5,weight:1};
+        }
+    }
 });
   dataLayer.addTo(map);
   map.setView([coord[1], coord[0]], zoom);
@@ -25,7 +30,7 @@ function initMap() {
   // This creates the Leaflet map with a generic start point, because GeoJSON layer includes all coordinates
   var map = L.map('map', {
     center: [0, 0],
-    zoom: 7,
+    zoom: 5,
     scrollWheelZoom: true
   });
 

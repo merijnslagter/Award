@@ -13,7 +13,7 @@ function refreshLayer(data, map, coord, zoom) {
     style: function(feature) {
         switch (feature.properties.name) {
 	      case 'plaats': return {color: "##f9ed32",opacity:0.8,fillOpacity: 0.7,weight:20};
-	      case 'peat': return {color: "#be0003",opacity:0.8,fillOpacity: 0.3,weight:1.5
+	      case 'peat': return {color: "#be0003",opacity:1.0,fillOpacity: 1.0,weight:0.0
 	      };
 	      case '25.00': return {color: "#fafafa",opacity:0.8,fillOpacity: 0.5,weight:1};
 	      case '50.00': return {color: "#a8a8a8",opacity:0.8,fillOpacity: 0.5,weight:1};
@@ -29,7 +29,8 @@ function refreshLayer(data, map, coord, zoom) {
 function initMap() {
   // This creates the Leaflet map with a generic start point, because GeoJSON layer includes all coordinates
   var map = L.map('map', {
-    center: [0, 0],
+    center: [ 5.4278199,
+          52.2825985],
     zoom: 5,
     scrollWheelZoom: true
   });
